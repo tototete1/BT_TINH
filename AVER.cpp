@@ -23,32 +23,25 @@ int main()
         a[i].s=a[i-1].s+x;
         a[i].id=i;
     }
+    for (i=1;i<=n;i++) cout <<a[i].s<<" ";cout <<endl;
     sort(a+1,a+1+n,cmp);
     m[1]=a[1].id;
-    //for (i=1;i<=n;i++) cout <<a[i].id<<" ";cout <<endl;
+    for (i=1;i<=n;i++) cout <<a[i].s<<" ";cout <<endl;
+    for (i=1;i<=n;i++) cout <<a[i].id<<" ";cout <<endl;
     for (i=2;i<=n;i++) m[i]=min(m[i-1],a[i].id);
-    //for (i=1;i<=n;i++) cout <<m[i]<<" ";
-    //cout <<endl;
-    for (i=2;i<=n;i++)
+    for (i=1;i<=n;i++) cout <<m[i]<<" ";
+    cout <<endl;
+    x=0;
+    for (i=1;i<=n;i++)
     {
-        d=1,c=i-1,vt=0;
-        do
+        if (a[i].id-m[i]>x)
         {
-            g=(d+c)/2;
-            if (m[g]<a[i].id)
-            {
-                c=g-1;
-                vt=g;
-            }
-            else d=g+1;
-        }while (d<=c);
-        if (vt!=0)
-        {
-            x=max(x,a[i].id-m[vt]);
-            k=m[vt]+1;
+            x=a[i].id-m[i];
+            k=m[i]+1;
         }
     }
     ofstream fo ("AVER.out");
-    fo <<x<<" "<<k;
+    if (x!=0)fo <<x<<" "<<k;
+    else fo <<0<<" "<<0;
     return 0;
 }
